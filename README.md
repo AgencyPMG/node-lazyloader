@@ -1,6 +1,8 @@
 # node-lazyloader
 A dynamic file loader for NodeJS, loads files (via require) if they are in a directory
-
+[![Build Status](https://travis-ci.org/AgencyPMG/node-lazyloader.svg?branch=master)](https://travis-ci.org/AgencyPMG/node-lazyloader)
+[![Coverage Status](https://coveralls.io/repos/AgencyPMG/node-lazyloader/badge.svg)](https://coveralls.io/r/AgencyPMG/node-lazyloader)
+[![npm version](https://badge.fury.io/js/node-lazyloader.svg)](http://badge.fury.io/js/node-lazyloader)
 ## Install
 ```
 npm install lazyloader
