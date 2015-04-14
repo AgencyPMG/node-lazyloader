@@ -8,7 +8,7 @@ npm install lazyloader
 
 ## How to Use
 ```js
-var LazyLoader = require('lazyloader');
+var LazyLoader = require('node-lazyloader');
 
 var lazy = new LazyLoader({
     debug: true, //gives you more verbose output
