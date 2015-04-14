@@ -4,7 +4,7 @@
   "description": "A dynamic file loader for node, loads files if they are in a directory",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,9 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "mocha": "^2.2.4"
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.4",
+    "mocha-lcov-reporter": "0.0.2"
   }
 }
