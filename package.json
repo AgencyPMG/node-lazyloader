@@ -1,6 +1,6 @@
 {
   "name": "node-lazyloader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A dynamic file loader for node, loads files if they are in a directory",
   "main": "index.js",
   "scripts": {
