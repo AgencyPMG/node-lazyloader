@@ -1,0 +1,29 @@
+{
+  "name": "node-lazyloader",
+  "version": "1.0.0",
+  "description": "A dynamic file loader for node, loads files if they are in a directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgencyPMG/node-lazyloader.git"
+  },
+  "keywords": [
+    "dynamic",
+    "loading"
+  ],
+  "author": "Chris Alvares <mail@chrisalvares.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AgencyPMG/node-lazyloader/issues"
+  },
+  "homepage": "https://github.com/AgencyPMG/node-lazyloader",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  }
+}
