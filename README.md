@@ -23,6 +23,12 @@ var lazy = new LazyLoader({
             return false;
         }
         return true;
+    },
+    post_filter: function(obj) {
+        if (obj instanceof MyParentClass) {
+            return true;
+        }
+        return false;
     }
 });
 
