@@ -15,6 +15,24 @@ describe('LazyLoader', function() {
       post_fiter: null
     });
 
+    var bandit = new LazyLoader({
+      debug: true,
+      filter: function(file){
+         if('.js' === path.extname(file) || 'index.js' === file) {
+            return true;
+         }
+         else {
+          return false;
+        }
+      },
+      post_filter: function(obj) {
+          if (obj instanceof LazyLoader) {
+              return true;
+          }
+          return false;
+      }
+    });
+
    describe('#fetch', function() {
        var jobs = lazy.fetch();
 
@@ -33,15 +51,13 @@ describe('LazyLoader', function() {
           assert.strictEqual(3, jobs.length);
       });
 
-      // it('should call function again with path/to/dir/file, and jobs array', function(){
-      //     // var expected = lazy.fetchFilesLazy(dir, jobs, 0);
-      //     // console.log(expected);
+      it('should log errors', function() {
+        var log = [];
+        var deadend = (__dirname + '/../../deadend');
+        lazy.fetchFilesLazy(deadend, jobs, log);
 
-      //     // assert.equal(true, i == 3);
-
-
-      //   // assert.equal(true, expected ==  )
-      // });
+        assert.notStrictEqual(0, log.length);
+      });
 
    });
 
@@ -56,14 +72,10 @@ describe('LazyLoader', function() {
        });
 
        it("should return false when obj's post_filter is not instance of parent class", function() {
-          var dir    = (__dirname + '/../../lib/');
-          var adopted = new LazyLoader({
-            post_filter: function(obj){
-              return false;
-            }
-          });
+          var dir    = (__dirname + '/../../test/fixtures/');
+          var expected = bandit.getActionOfFile(dir, 'a.js');
 
-          assert.strictEqual(false, adopted.getActionOfFile(dir, 'lazyloader.js'));
+          assert.strictEqual(false, bandit.getActionOfFile(dir, 'a.js'));
         });
 
        it('should return obj when action is file', function() {
@@ -78,38 +90,44 @@ describe('LazyLoader', function() {
 
    describe('#isBlacklistedFile', function() {
         var dir = (__dirname + '/../../');
-        var bandit = new LazyLoader({
-          filter: function(file){
-             if('.js' === path.extname(file) || 'index.js' === file) {
-                return true;
-             }
-             else {
-              return false;
-            }
-          }
-        });
+        var tinker = new LazyLoader();
+        tinker.options.filter = null;
 
         it('should return false for file with true filter property', function() {
             var expected = bandit.isBlacklistedFile(dir + 'lib/lazyloader.js');
+
             assert.strictEqual(false, expected);
         });
 
-       // it('should return false for file without .js extension or index.js filename', function() {
-       //      var expected = bandit.isBlacklistedFile('README.md');
+        it('should return true for file with null filter option and .js extension or index.js filename', function() {
+            var expected = tinker.isBlacklistedFile(dir + 'test/fixtures/testdir/b.js');
 
-       //      assert.equal(true, expected === false);
-       // });
+            assert.strictEqual(true, expected);
+        });
+
+        it('should return true for file with null filter option and index.js filename', function() {
+            var expected = tinker.isBlacklistedFile(dir + 'index.js');
+
+            assert.strictEqual(true, expected);
+        })
+
+       it('should return false for file with null filter option and without .js extension or index.js filename', function() {
+            var expected = tinker.isBlacklistedFile(dir + 'README.md');
+
+            assert.strictEqual(false, expected);
+       });
    });
 
-   // describe('#log', function() {
+   describe('#log', function() {
 
-   //     it('should log to console when debug option is true', function() {
+       it('should log to console when debug option is true', function() {
+          var log = [];
+          bandit.log('logger', log);
 
-   //     });
+          assert.notStrictEqual(0, log.length);
 
-   //     it('should not log to console when debug option is false', function() {
+       });
 
-   //     });
-   // });
+   });
 
 });
