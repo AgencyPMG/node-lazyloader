@@ -1,1 +1,1 @@
-var LazyLoader = module.exports = require('./lib/lazyloader');
+module.exports = require('./lib/lazyloader');
