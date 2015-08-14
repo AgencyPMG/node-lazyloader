@@ -55,7 +55,7 @@ describe('LazyLoader', function() {
     it("should return false when obj is not instance of parent class", function() {
       var adoptedObj = new LazyLoader();
       var postMod = function(obj) {
-        if (obj instanceof LazyLoader) {
+        if (LazyLoader.prototype.isPrototypeOf(adoptedObj)) {
           return true;
         }
         return false;
@@ -66,6 +66,21 @@ describe('LazyLoader', function() {
       var expected = adoptedObj.getActionOfFile(dir, 'a.js');
 
       assert.strictEqual(false, expected);
+    });
+
+    it('should return false when no rows are selected', function() {
+
+      var dir = (__dirname + '/../../test/fixtures/');
+      var adoptedObj = new LazyLoader({
+        post_filter: function() {
+          return false;
+        }
+      });
+
+      var expected = adoptedObj.getActionOfFile(dir, 'a.js');
+
+      assert.strictEqual(false, expected);
+
     });
 
     it('should return obj when action is file', function() {
