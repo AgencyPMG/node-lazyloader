@@ -7,6 +7,7 @@
 A dynamic file loader for NodeJS, loads files (via require) if they are in a directory
 
 ## Install
+
 ```
 npm install lazyloader
 ```
